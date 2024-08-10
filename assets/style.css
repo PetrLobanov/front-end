@@ -78,6 +78,7 @@
   body {
     font-family: "Roboto", sans-serif;
     font-weight: 400;
+    background: rgb(242, 244, 238);
   }
 
   .color-27-23-22 {
@@ -87,4 +88,7 @@
   .color-64-73-64 {
     color: rgb(64, 73, 64)
   }
-  
+
+  .color-54-81-91 {
+    color: rgb(54, 81, 91);
+  }

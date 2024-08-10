@@ -4,7 +4,7 @@
             <label for="" class="color-27-23-22 text-xs">{{ props.label }}</label>
         </div>
         <div class="relative">
-            <img :src="`/_nuxt/assets/icons/${props.icon}`" alt="">
+            <img :src="`icons/${props.icon}`" alt="">
             <input type="text" id="" :placeholder="props.placeholder" class="w-full">
         </div>
     </div>

@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper">
         <div>
-            <img class="logo" src="../assets/logo-white.png" alt="">
+            <img class="logo" src="/logo-white.png" alt="">
         </div>
         <div class="form">
             <LoginForm></LoginForm>
@@ -14,22 +14,25 @@
 </template>
   
 <script lang="ts" setup>
-    import LoginForm from '~/widgets/LoginForm.vue'
+    import LoginForm from '~/widgets/LoginForm.vue';
+    definePageMeta({
+        layout: 'start'
+    })
 </script>
 
 <style scoped>
     .wrapper {
-        background-image: url('~/assets/login-bg.png');
-        background-size: cover;
-        background-attachment: fixed;
-        height: 100%;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
     }
     .form {
         display: flex;
+        flex: 1;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin-top: 60px;
+        margin-top: 45px;
     }
     .logo {
         padding: 36px 0 0 0;
@@ -37,6 +40,7 @@
         display: block;
     }
     .wrapper__bottom {
-        padding: 48px 48px;
+        padding: 12px 48px;
+        width: 100%;
     }
 </style>
