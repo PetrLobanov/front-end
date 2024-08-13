@@ -54,7 +54,8 @@
 </template>
 
 <script lang="ts" setup>
-   import TableManagement from '~/widgets/TableManagement.vue';
+
+   import TableManagement from '~/widgets/table/TableManagement.vue';
 
    const data = {
         static: {
