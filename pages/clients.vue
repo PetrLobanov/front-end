@@ -1,29 +1,7 @@
 <template>
     <div class="clients-wrapper">
         <div class="my-table">
-            <div class="table-filter flex">
-                <div class="table-filler__item flex">
-                    <img class="table-filler__item--img" src="/icons/closed-eye.svg" alt="">
-                    <span>Спрятать поля</span>
-                </div>
-                <div class="table-filler__item flex">
-                    <img class="table-filler__item--img" src="/icons/table.svg" alt="">
-                    <span>табличный вид</span>
-                    <img class="table-filler__item--img-help" src="/icons/table-bird.svg" alt="">
-                </div>
-                <div class="table-filler__item flex">
-                    <img class="table-filler__item--img" src="/icons/filter.svg" alt="">
-                    <span>фильтры</span>
-                </div>
-                <div class="table-filler__item flex">
-                    <img class="table-filler__item--img" src="/icons/group.svg" alt="">
-                    <span>сгруппировать</span>
-                </div>
-                <div class="table-filler__item flex">
-                    <img class="table-filler__item--img" src="/icons/sort.svg" alt="">
-                    <span>Сортировка</span>
-                </div>
-            </div>
+            <TableManagement />
             <div class="table-content flex">
                 <div class="table-content__static">
                     <div class="flex">
@@ -76,6 +54,8 @@
 </template>
 
 <script lang="ts" setup>
+   import TableManagement from '~/widgets/TableManagement.vue';
+
    const data = {
         static: {
             name: 'Наименование',
@@ -156,25 +136,6 @@
         padding-top: 26px;
         padding-left: 32px;
         padding-bottom: 26px;
-    }
-    .table-filter {
-        padding-bottom: 26px;
-    }
-    .table-filler__item {
-        padding-left: 16px;
-        padding-right: 16px;
-        cursor: pointer;
-    }
-    .table-filler__item span {
-        font-weight: 500;
-        text-transform: uppercase;
-        font-size: 14px;
-    }
-    .table-filler__item  .table-filler__item--img {
-        padding-right: 8px;
-    }
-    .table-filler__item--img-help {
-        padding-left: 8px;
     }
     .table-content {
         border-radius: 4px 0px 0px 0px;
