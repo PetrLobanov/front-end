@@ -1,20 +1,20 @@
 <template lang="pug">
 .table-filter.flex
-  .table-filler__item.flex
-    img.table-filler__item--img(src="/icons/closed-eye.svg" alt="")
+  .table-filter__item.flex
+    img.table-filter__item--img(src="/icons/closed-eye.svg" alt="")
     span Спрятать поля
-  .table-filler__item.flex
-    img.table-filler__item--img(src="/icons/table.svg" alt="")
+  .table-filter__item.flex
+    img.table-filter__item--img(src="/icons/table.svg" alt="")
     span Табличный вид
-    img.table-filler__item--img-help(src="/icons/table-bird.svg" alt="")
-  .table-filler__item.flex
-    img.table-filler__item--img(src="/icons/filter.svg" alt="")
+    img.table-filter__item--img-help(src="/icons/table-bird.svg" alt="")
+  .table-filter__item.flex
+    img.table-filter__item--img(src="/icons/filter.svg" alt="")
     span Фильтры
-  .table-filler__item.flex
-    img.table-filler__item--img(src="/icons/group.svg" alt="")
+  .table-filter__item.flex
+    img.table-filter__item--img(src="/icons/group.svg" alt="")
     span Сгруппировать
-  .table-filler__item.flex
-    img.table-filler__item--img(src="/icons/sort.svg" alt="")
+  .table-filter__item.flex
+    img.table-filter__item--img(src="/icons/sort.svg" alt="")
     span Сортировка
 </template>
 
@@ -32,6 +32,7 @@
     font-weight: 500
     text-transform: uppercase
     font-size: 14px
+    white-space: nowrap
   &__item--img
     padding-right: 8px
   &__item--img-help
