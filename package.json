@@ -11,11 +11,13 @@
   },
   "dependencies": {
     "nuxt": "^3.12.4",
+    "vite-plugin-pug": "^0.3.2",
     "vue": "latest"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.41",
+    "sass": "^1.77.8",
     "tailwindcss": "^3.4.7"
   }
 }
