@@ -7,4 +7,8 @@ interface SortColumn extends TableColumn {
     direction: 'asc' | 'desc',
 }
 
-export type { TableColumn, SortColumn }
+interface FilterItem extends TableColumn {
+    value: string,
+}
+
+export type { TableColumn, SortColumn, FilterItem }
