@@ -5,13 +5,13 @@
             .table-filter__between
                 | {{ col.name }}
                 FormInput(v-model="col.value")
-            img.table-filter__del(src="/icons/del.svg" alt="" @click="delColumn(index)")
-        .table-filter__add.--hover(v-if="unusedColumns.length" @click="showSelect = !showSelect")
+            img.table-filter__del(src="/icons/del.svg" alt="" @click.stop="delColumn(index)")
+        .table-filter__add.--hover(v-if="unusedColumns.length" @click.stop="showSelect = !showSelect")
             img(src="/icons/table-bird.svg" alt="")
             | Добавить поле
         .table-filter__item.--hover(v-if="showSelect" v-for="col in unusedColumns" @click="addColumn(col); showSelect = false") {{ col.name }}
     .table-filter__empty(v-else)
-        .table-filter__item.--hover(v-for="col in props.columns" @click="addColumn(col)") {{ col.name }}
+        .table-filter__item.--hover(v-for="col in props.columns" @click.stop="addColumn(col)") {{ col.name }}
 </template>
 
 <script lang="ts" setup>
