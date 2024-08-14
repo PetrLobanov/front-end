@@ -1,8 +1,8 @@
 <template lang="pug">
 FormField(:error="error")
-    .l-input(:class="{'--error': error}")
-        img(v-if="leftIcon" :src="`icons/${leftIcon}`" :name="leftIcon").l-input__icon
-        input.l-input__input(type="text" v-model="model" v-bind="$attrs")
+    .form-input(:class="{'--error': error}")
+        img(v-if="leftIcon" :src="`icons/${leftIcon}`" :name="leftIcon").form-input__icon
+        input.form-input__input(type="text" v-model="model" v-bind="$attrs")
         slot
 </template>
 
@@ -26,16 +26,15 @@ const model = computed({
 </script>
 
 <style lang="sass" scoped>
-.l-input
+.form-input
     box-sizing: border-box
     display: flex
     justify-content: space-between
     align-items: center
-    padding: 7px 8px
+    padding: 5px 6px
     gap: 5px
     background-color: var(--gray-50-color)
     border: 1px solid var(--gray-300-color)
-    border-radius: 6px
     font-size: 16px
     &.--error
         color: var(--red-500-color)
@@ -45,9 +44,7 @@ const model = computed({
         outline: none
         border: none
         background: none
-        font-weight: 500
         font-size: 14px
-        line-height: 22px
         color: var(--gray-900-color)
         &::placeholder
             color: var(--gray-300-color)

@@ -4,6 +4,7 @@
         .table-filter__item.--selected(v-for="(col, index) in model")
             .table-filter__between
                 | {{ col.name }}
+                FormSelect(v-model="col.operator" :options="getOperatorsbyType(col.type)")
                 FormInput(v-model="col.value")
             img.table-filter__del(src="/icons/del.svg" alt="" @click.stop="delColumn(index)")
         .table-filter__add.--hover(v-if="unusedColumns.length" @click.stop="showSelect = !showSelect")
@@ -15,9 +16,11 @@
 </template>
 
 <script lang="ts" setup>
-import type { TableColumn, FilterItem } from '~/helpers/interfaces'
+import type { TableColumn, FilterItem, TableColumnType } from '~/helpers/interfaces'
+import { operatorsOptions } from '~/helpers/helpers'
 import TableSortDirection from '~/widgets/table/TableSortDirection.vue'
 import FormInput from '~/shared/ui/forms/FormInput.vue'
+import FormSelect from '~/shared/ui/forms/FormSelect.vue'
 
 const props = defineProps<{
     modelValue: TableColumn[],
@@ -35,6 +38,7 @@ const model: ComputedRef<TableColumn[]> = computed({
 
 const addColumn = (col: FilterItem) => {
     col.value = ''
+    col.operator = ''
     model.value.push(col)
 }
 
@@ -49,6 +53,10 @@ const columnsNames: ComputedRef<string[]> = computed(() => {
 const unusedColumns: ComputedRef<TableColumn[]> = computed(() => {
     return props.columns.filter((col:TableColumn) => !columnsNames.value.includes(col.name))
 })
+
+const getOperatorsbyType = (type: TableColumnType) => {
+    return operatorsOptions[type]
+}
 
 const showSelect: Ref<boolean> = ref(false)
 </script>
