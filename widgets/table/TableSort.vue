@@ -1,8 +1,10 @@
 <template lang="pug">
 .table-sort
     .table-sort__content(v-if="model.length")
-        .table-sort__item(v-for="(col, index) in model")
-            | {{ col.name }} {{ col.type }}
+        .table-sort__item.--selected(v-for="(col, index) in model")
+            .table-sort__between
+                | {{ col.name }}
+                TableSortDirection(:column="col")
             img.table-sort__del(src="/icons/del.svg" alt="" @click="delColumn(index)")
         .table-sort__add.--hover(v-if="unusedColumns.length" @click="showSelect = !showSelect")
             img(src="/icons/table-bird.svg" alt="")
@@ -13,7 +15,8 @@
 </template>
 
 <script lang="ts" setup>
-import type { TableColumn } from '~/helpers/interfaces'
+import type { TableColumn, SortColumn } from '~/helpers/interfaces'
+import TableSortDirection from '~/widgets/table/TableSortDirection.vue'
 
 const props = defineProps<{
     modelValue: TableColumn[],
@@ -29,7 +32,8 @@ const model: ComputedRef<TableColumn[]> = computed({
     },
 })
 
-const addColumn = (col: TableColumn) => {
+const addColumn = (col: SortColumn) => {
+    col.direction = 'asc'
     model.value.push(col)
 }
 
@@ -46,7 +50,6 @@ const unusedColumns: ComputedRef<TableColumn[]> = computed(() => {
 })
 
 const showSelect: Ref<boolean> = ref(false)
-const newCol: Ref<TableColumn | null> = ref(null)
 </script>
 
 <style lang="sass" scoped>
@@ -67,6 +70,14 @@ const newCol: Ref<TableColumn | null> = ref(null)
         color: #1B1716
         &.--hover:hover
             background-color: #2C6A3C24
+        &.--selected
+            justify-content: space-between
+    &__between
+        flex: 1
+        display: flex
+        align-items: center
+        justify-content: space-between
+        gap: 25px
     &__add
         margin: 0 15px
         color: #36515B

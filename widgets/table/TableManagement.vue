@@ -1,5 +1,4 @@
 <template lang="pug">
-div sort: {{ sort }}
 .table-filter.flex
     .table-filter__item.flex
         img.table-filter__item--img(src="/icons/closed-eye.svg" alt="")
@@ -20,16 +19,14 @@ div sort: {{ sort }}
             span.table-filter__title Сортировка
         .table-filter__dropdown-box
             TableSort(:columns="columns" v-model="sort")
-div(style="margin: 0 0 30px 0")
-TableSort(:columns="columns" v-model="sort")
 </template>
 
 <script lang="ts" setup>
 import type { TableColumn } from '~/helpers/interfaces'
 import DropDown from '~/shared/ui/DropDown.vue'
-import TableSort from '~/widgets/table/TableSort.vue';
+import TableSort from '~/widgets/table/TableSort.vue'
 
-const  columns: TableColumn[] = [{ name: 'Наименование', type: 'string'}, { name: 'Изделие (я)', type: 'string'}, { name: 'Количество', type: 'number'}]
+const  columns: TableColumn[] = [{ name: 'Наименование', type: 'string'}, { name: 'Количество', type: 'number'}, { name: 'Дата', type: 'date'}, { name: 'Статус', type: 'status'}, ]
 const sort: TableColumn[] = reactive([])
 </script>
 
@@ -54,6 +51,5 @@ const sort: TableColumn[] = reactive([])
         display: flex
         align-items: center
     &__dropdown-box
-        // padding: 0 15px
         cursor: default
 </style>

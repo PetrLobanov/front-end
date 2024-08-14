@@ -1,6 +1,10 @@
 interface TableColumn {
     name: string
-    type: 'string' | 'number',
+    type: 'string' | 'number' | 'date' | 'status',
 }
 
-export type { TableColumn }
+interface SortColumn extends TableColumn {
+    direction: 'asc' | 'desc',
+}
+
+export type { TableColumn, SortColumn }
