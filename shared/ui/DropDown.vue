@@ -1,5 +1,5 @@
 <template lang="pug">
-.dropdown(ref="dropdown" @focus="show = true" @blur="show = false" tabindex="-1" :class="{'--open': show}")
+.dropdown(ref="dropdown" @focus="show = true" @blur="onBlur" tabindex="-1" :class="{'--open': show}")
     .dropdown__trigger(role="button" @click="open()")
         slot(name="trigger")
     .dropdown__box(:class="{'--show': show}")
@@ -7,19 +7,46 @@
 </template>
 
 <script lang="ts" setup>
-    const show = ref(false)
-    const dropdown:any = ref(null)
+export interface Props {
+    blur?: boolean
+}
+const props = withDefaults(defineProps<Props>(), {
+    blur: true,
+})
+const show = ref(false)
+const dropdown:any = ref(null)
 
-    const close = () => {
-        dropdown.value.blur()
+const close = () => {
+    dropdown.value.blur()
+}
+const open = () => {
+    dropdown.value.focus()
+}
+const getEl = () => {
+    return dropdown.value
+}
+defineExpose({ close, open, getEl, show })
+const onBlur = () => {
+    if(props.blur) {
+        show.value = false
     }
-    const open = () => {
-        dropdown.value.focus()
+}
+
+if(!props.blur) {
+    const onClick = (Event) => {
+        const el = getEl()
+        if (!(el == Event.target || el.contains(Event.target))) {
+            show.value = false
+        }
     }
-    const getEl = () => {
-        return dropdown.value
-    }
-    defineExpose({ close, open, getEl, show })
+    onMounted(() => {
+        document.body.addEventListener('click', onClick)
+    })
+    onUnmounted(() => {
+        document.body.removeEventListener('click', onClick)
+    })
+
+}
 </script>
 
 <style lang="sass" scoped>
