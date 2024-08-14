@@ -4,12 +4,12 @@
         .table-sort__item(v-for="(col, index) in model")
             | {{ col.name }} {{ col.type }}
             img.table-sort__del(src="/icons/del.svg" alt="" @click="delColumn(index)")
-        .table-sort__add(v-if="unusedColumns.length" @click="showSelect = !showSelect")
+        .table-sort__add.--hover(v-if="unusedColumns.length" @click="showSelect = !showSelect")
             img(src="/icons/table-bird.svg" alt="")
             | Добавить поле
-        .table-sort__item(v-if="showSelect" v-for="col in unusedColumns" @click="addColumn(col); showSelect = false") {{ col.name }}
+        .table-sort__item.--hover(v-if="showSelect" v-for="col in unusedColumns" @click="addColumn(col); showSelect = false") {{ col.name }}
     .table-sort__empty(v-else)
-        .table-sort__item(v-for="col in props.columns" @click="addColumn(col)") {{ col.name }}
+        .table-sort__item.--hover(v-for="col in props.columns" @click="addColumn(col)") {{ col.name }}
 </template>
 
 <script lang="ts" setup>
@@ -58,9 +58,17 @@ const newCol: Ref<TableColumn | null> = ref(null)
         align-items: center
         gap: 5px
         white-space: nowrap
+        &.--hover
+            cursor: pointer
+            &:hover
+                color: #000
     &__item
-        padding: 5px 0
+        padding: 5px 15px
+        color: #1B1716
+        &.--hover:hover
+            background-color: #2C6A3C24
     &__add
+        margin: 0 15px
         color: #36515B
         padding: 10px 0
         border-top: 1px solid #C0C9BD

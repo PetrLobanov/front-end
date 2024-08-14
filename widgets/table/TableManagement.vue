@@ -54,6 +54,6 @@ const sort: TableColumn[] = reactive([])
         display: flex
         align-items: center
     &__dropdown-box
-        padding: 0 15px
+        // padding: 0 15px
         cursor: default
 </style>
