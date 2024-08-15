@@ -3,7 +3,8 @@
     .table-filter__content(v-if="model.length")
         .table-filter__item.--selected(v-for="(col, index) in model")
             .table-filter__between
-                | {{ col.name }}
+                //- | {{ col.name }}
+                FormSelect(:options="unusedColumns" option-attribute="name")
                 FormSelect(v-model="col.operator" :options="getOperatorsbyType(col.type)")
                 FormInput(v-model="col.value")
             img.table-filter__del(src="/icons/del.svg" alt="" @click.stop="delColumn(index)")
@@ -38,7 +39,7 @@ const model: ComputedRef<TableColumn[]> = computed({
 
 const addColumn = (col: FilterItem) => {
     col.value = ''
-    col.operator = ''
+    col.operator = operatorsOptions[col.type][0]
     model.value.push(col)
 }
 

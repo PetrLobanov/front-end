@@ -3,36 +3,44 @@ FormField(:error="error")
     DropDown.form-select(:class="{'--error': error}")
         template(#trigger)
             img(v-if="leftIcon" :src="`icons/${leftIcon}`" :name="leftIcon").form-select__icon
-            //- input.form-select__input(type="text" v-model="model" v-bind="$attrs")
-            .form-select__input {{ currOption.label }}
+            .form-select__input {{ currOption[props.optionAttribute] || '&nbsp;' }}
                 img.form-select__icon(src="/icons/table-bird.svg" alt="")
         .form-select__dropdown-box
-            .form-select__option(v-for="option in props.options" @click.stop="setOption(option)") {{ option.label }}
+            .form-select__option(v-for="option in props.options" @click.stop="setOption(option)") {{ option[props.optionAttribute] }}
 </template>
 
 <script lang="ts" setup>
 import FormField from '~/shared/ui/forms/FormField.vue'
 import DropDown from '~/shared/ui/DropDown.vue'
 
-const props = defineProps<{
-    modelValue: string,
+export interface Props {
+    modelValue?: any,
     options: any[],
     error?: any,
     leftIcon?: string,
-}>()
+    optionAttribute?: string
+}
+const props = withDefaults(defineProps<Props>(), {
+    optionAttribute: 'label',
+    valueAttribute: 'value',
+})
+
 const emit = defineEmits(['update:modelValue'])
 const model = computed({
     get() {
-    return props.modelValue;
+        return props.modelValue
     },
     set(value) {
-    emit("update:modelValue", value);
+        emit("update:modelValue", value)
     },
 })
 
-const currOption = ref({ label: '-'})
+const defaultVal: any = {}
+defaultVal[props.optionAttribute] = ''
+const currOption: Ref<any> = ref(model && model.value ? model : defaultVal)
 const setOption = (option: any) => {
     currOption.value = option
+    emit("update:modelValue", option)
 }
 </script>
 

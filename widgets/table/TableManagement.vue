@@ -1,5 +1,5 @@
 <template lang="pug">
-//- div filter: {{ filter }}
+div filter: {{ filter }}
 .table-options.flex
     .table-options__item.flex
         img.table-options__item--img(src="/icons/closed-eye.svg" alt="")
@@ -24,8 +24,8 @@
             span.table-options__title Сортировка
         .table-options__dropdown-box
             TableSort(:columns="columns" v-model="sort")
-//- div(style="margin-bottom: 50px;")
-//- TableFilter(:columns="columns" v-model="filter")
+div(style="margin-bottom: 50px;")
+TableFilter(:columns="columns" v-model="filter")
 </template>
 
 <script lang="ts" setup>
