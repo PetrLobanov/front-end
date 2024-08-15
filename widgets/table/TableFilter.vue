@@ -3,30 +3,27 @@
     .table-filter__content(v-if="model.length")
         .table-filter__item.--selected(v-for="(col, index) in model")
             .table-filter__between
-                FormSelect(:options="unusedColumns" :current="col" option-attribute="name" @update:modelValue="onUpdate($event, index)")
-                FormSelect(v-model="col.operator" :options="getOperatorsbyType(col.type)")
+                | {{ col.name }}
                 FormInput(v-model="col.value")
             img.table-filter__del(src="/icons/del.svg" alt="" @click.stop="delColumn(index)")
         .table-filter__add.--hover(v-if="unusedColumns.length" @click.stop="showSelect = !showSelect")
             img(src="/icons/table-bird.svg" alt="")
             | Добавить поле
-        .table-filter__item.--hover(v-if="showSelect" v-for="col in unusedColumns" @click="addColumn(col); hideSelect()") {{ col.name }}
+        .table-filter__item.--hover(v-if="showSelect" v-for="col in unusedColumns" @click="addColumn(col); showSelect = false") {{ col.name }}
     .table-filter__empty(v-else)
         .table-filter__item.--hover(v-for="col in props.columns" @click.stop="addColumn(col)") {{ col.name }}
 </template>
 
 <script lang="ts" setup>
-import type { TableColumn, FilterItem, TableColumnType } from '~/helpers/interfaces'
-import { operatorsOptions } from '~/helpers/helpers'
+import type { TableColumn, FilterItem } from '~/helpers/interfaces'
 import TableSortDirection from '~/widgets/table/TableSortDirection.vue'
 import FormInput from '~/shared/ui/forms/FormInput.vue'
-import FormSelect from '~/shared/ui/forms/FormSelect.vue'
 
 const props = defineProps<{
     modelValue: TableColumn[],
     columns: [],
 }>()
-const emit = defineEmits(['update:modelValue', 'updateFilter'])
+const emit = defineEmits(['update:modelValue'])
 const model: ComputedRef<TableColumn[]> = computed({
     get() {
         return props.modelValue;
@@ -38,7 +35,6 @@ const model: ComputedRef<TableColumn[]> = computed({
 
 const addColumn = (col: FilterItem) => {
     col.value = ''
-    col.operator = operatorsOptions[col.type][0]
     model.value.push(col)
 }
 
@@ -54,21 +50,7 @@ const unusedColumns: ComputedRef<TableColumn[]> = computed(() => {
     return props.columns.filter((col:TableColumn) => !columnsNames.value.includes(col.name))
 })
 
-const getOperatorsbyType = (type: TableColumnType) => {
-    return operatorsOptions[type]
-}
-
 const showSelect: Ref<boolean> = ref(false)
-
-const onUpdate = (val: FilterItem, index: number) => {
-    emit('updateFilter', val, index)
-}
-
-const hideSelect = () => {
-    setTimeout(() => {
-        showSelect.value = false
-    }, 50)
-}
 </script>
 
 <style lang="sass" scoped>
@@ -96,11 +78,7 @@ const hideSelect = () => {
         display: flex
         align-items: center
         justify-content: space-between
-        gap: 5px
-        &:deep(.form-field)
-            width: 115px
-            position: relative
-            left: 1px
+        gap: 25px
     &__add
         margin: 0 15px
         color: #36515B
