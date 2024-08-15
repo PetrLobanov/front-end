@@ -1,7 +1,7 @@
 <template lang="pug">
-.l-form-field
+.form-field
     slot
-    .l-form-field__error(v-if="error") {{ error }}
+    .form-field__error(v-if="error") {{ error }}
 </template>
 
 <script lang="ts" setup>
@@ -12,7 +12,7 @@ const props: any = defineProps<{
 </script>
 
 <style lang="sass" scoped>
-.l-form-field
+.form-field
     display: flex
     flex-direction: column
     gap: 5px

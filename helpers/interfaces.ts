@@ -1,6 +1,8 @@
+type TableColumnType = 'string' | 'number' | 'date' | 'status'
+
 interface TableColumn {
     name: string
-    type: 'string' | 'number' | 'date' | 'status',
+    type: TableColumnType
 }
 
 interface SortColumn extends TableColumn {
@@ -9,6 +11,7 @@ interface SortColumn extends TableColumn {
 
 interface FilterItem extends TableColumn {
     value: string,
+    operator?: any
 }
 
-export type { TableColumn, SortColumn, FilterItem }
+export type { TableColumnType, TableColumn, SortColumn, FilterItem }
