@@ -46,6 +46,7 @@ const model = computed({
         background: none
         font-size: 14px
         color: var(--gray-900-color)
+        width: 100%
         &::placeholder
             color: var(--gray-300-color)
     &__icon, &:deep(svg)

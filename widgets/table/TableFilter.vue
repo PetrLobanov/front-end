@@ -96,7 +96,11 @@ const hideSelect = () => {
         display: flex
         align-items: center
         justify-content: space-between
-        gap: 25px
+        gap: 5px
+        &:deep(.form-field)
+            width: 115px
+            position: relative
+            left: 1px
     &__add
         margin: 0 15px
         color: #36515B

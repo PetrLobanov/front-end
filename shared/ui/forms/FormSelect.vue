@@ -3,7 +3,8 @@ FormField(:error="error")
     DropDown.form-select(:class="{'--error': error}")
         template(#trigger)
             img(v-if="leftIcon" :src="`icons/${leftIcon}`" :name="leftIcon").form-select__icon
-            .form-select__input {{ getCurrenVal() }}
+            .form-select__input
+                span {{ getCurrenVal() }}
                 img.form-select__icon(src="/icons/table-bird.svg" alt="")
         .form-select__dropdown-box
             .form-select__option(v-for="option in props.options" @click.stop="setOption(option)") {{ option[props.optionAttribute] }}
@@ -61,10 +62,13 @@ const getCurrenVal = () => {
     background-color: var(--gray-50-color)
     border: 1px solid var(--gray-300-color)
     font-size: 16px
+    &:deep(.dropdown__trigger)
+        width: 100%
     &.--error
         color: var(--red-500-color)
         border-color: var(--red-500-color)
     &__input
+        width: 100%
         display: flex
         align-items: center
         justify-content: space-between
@@ -75,6 +79,10 @@ const getCurrenVal = () => {
         min-width: 6em
         &::placeholder
             color: var(--gray-300-color)
+        span
+            overflow: hidden
+            white-space: nowrap
+            text-overflow: ellipsis
     &__icon, &:deep(svg)
         max-width: none
         width: 12px
