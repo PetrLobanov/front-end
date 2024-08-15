@@ -1,6 +1,8 @@
+type TableColumnType = 'string' | 'number' | 'date' | 'status'
+
 interface TableColumn {
     name: string
-    type: 'string' | 'number' | 'date' | 'status',
+    type: TableColumnType
 }
 
 interface SortColumn extends TableColumn {
@@ -9,6 +11,7 @@ interface SortColumn extends TableColumn {
 
 interface FilterItem extends TableColumn {
     value: string,
+    operator?: any
 }
 
 interface TableType {
@@ -33,4 +36,4 @@ interface TableType {
     // final_payment_actual_date: string,
 }
 
-export type { TableColumn, SortColumn, FilterItem, TableType }
+export type { TableColumnType, TableColumn, SortColumn, FilterItem, TableType }
