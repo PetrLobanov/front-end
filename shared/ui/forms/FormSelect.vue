@@ -3,7 +3,7 @@ FormField(:error="error")
     DropDown.form-select(:class="{'--error': error}")
         template(#trigger)
             img(v-if="leftIcon" :src="`icons/${leftIcon}`" :name="leftIcon").form-select__icon
-            .form-select__input {{ currOption[props.optionAttribute] || '&nbsp;' }}
+            .form-select__input {{ getCurrenVal() }}
                 img.form-select__icon(src="/icons/table-bird.svg" alt="")
         .form-select__dropdown-box
             .form-select__option(v-for="option in props.options" @click.stop="setOption(option)") {{ option[props.optionAttribute] }}
@@ -15,6 +15,7 @@ import DropDown from '~/shared/ui/DropDown.vue'
 
 export interface Props {
     modelValue?: any,
+    current?: any,
     options: any[],
     error?: any,
     leftIcon?: string,
@@ -31,7 +32,7 @@ const model = computed({
         return props.modelValue
     },
     set(value) {
-        emit("update:modelValue", value)
+        emit('update:modelValue', value)
     },
 })
 
@@ -40,7 +41,12 @@ defaultVal[props.optionAttribute] = ''
 const currOption: Ref<any> = ref(model && model.value ? model : defaultVal)
 const setOption = (option: any) => {
     currOption.value = option
-    emit("update:modelValue", option)
+    emit('update:modelValue', option)
+}
+
+const getCurrenVal = () => {
+    let res = currOption.value[props.optionAttribute] || (props.current ? props.current[props.optionAttribute] : '-')
+    return res
 }
 </script>
 

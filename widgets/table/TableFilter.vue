@@ -3,15 +3,14 @@
     .table-filter__content(v-if="model.length")
         .table-filter__item.--selected(v-for="(col, index) in model")
             .table-filter__between
-                //- | {{ col.name }}
-                FormSelect(:options="unusedColumns" option-attribute="name")
+                FormSelect(:options="unusedColumns" :current="col" option-attribute="name" @update:modelValue="onUpdate($event, index)")
                 FormSelect(v-model="col.operator" :options="getOperatorsbyType(col.type)")
                 FormInput(v-model="col.value")
             img.table-filter__del(src="/icons/del.svg" alt="" @click.stop="delColumn(index)")
         .table-filter__add.--hover(v-if="unusedColumns.length" @click.stop="showSelect = !showSelect")
             img(src="/icons/table-bird.svg" alt="")
             | Добавить поле
-        .table-filter__item.--hover(v-if="showSelect" v-for="col in unusedColumns" @click="addColumn(col); showSelect = false") {{ col.name }}
+        .table-filter__item.--hover(v-if="showSelect" v-for="col in unusedColumns" @click="addColumn(col); hideSelect()") {{ col.name }}
     .table-filter__empty(v-else)
         .table-filter__item.--hover(v-for="col in props.columns" @click.stop="addColumn(col)") {{ col.name }}
 </template>
@@ -27,7 +26,7 @@ const props = defineProps<{
     modelValue: TableColumn[],
     columns: [],
 }>()
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'updateFilter'])
 const model: ComputedRef<TableColumn[]> = computed({
     get() {
         return props.modelValue;
@@ -60,6 +59,16 @@ const getOperatorsbyType = (type: TableColumnType) => {
 }
 
 const showSelect: Ref<boolean> = ref(false)
+
+const onUpdate = (val: FilterItem, index: number) => {
+    emit('updateFilter', val, index)
+}
+
+const hideSelect = () => {
+    setTimeout(() => {
+        showSelect.value = false
+    }, 50)
+}
 </script>
 
 <style lang="sass" scoped>
