@@ -13,10 +13,12 @@
             span.table-options__title Фильтры
         .table-options__dropdown-box
             TableFilter(:columns="columns" v-model="filter" @update-filter="onUpdateFilter")
-    DropDown.table-options__item.flex
+    DropDown(:blur="false").table-options__item.flex
         template(#trigger)
             img.table-options__item--img(src="/icons/group.svg" alt="")
             span.table-options__title Сгруппировать
+        .table-options__dropdown-box
+            TableGroups(:columns="columns" v-model="groups" @update-groups="onUpdateGroups")
     DropDown.table-options__item.flex
         template(#trigger)
             img.table-options__item--img(src="/icons/sort.svg" alt="")
@@ -26,22 +28,29 @@
 </template>
 
 <script lang="ts" setup>
-import type { TableColumn, FilterItem } from '~/helpers/interfaces'
+import type { TableColumn, FilterItem, SortColumn } from '~/helpers/interfaces'
 import { operatorsOptions } from '~/helpers/helpers'
 import DropDown from '~/shared/ui/DropDown.vue'
 import TableSort from '~/widgets/table/TableSort.vue'
 import TableFilter from '~/widgets/table/TableFilter.vue'
+import TableGroups from '~/widgets/table/TableGroups.vue'
 
-
-const  columns: TableColumn[] = [{ name: 'Наименование', type: 'string'}, { name: 'Количество', type: 'number'}, { name: 'Дата', type: 'date'}, { name: 'Статус', type: 'status'}, ]
+const columns: TableColumn[] = [{ name: 'Наименование', type: 'string'}, { name: 'Количество', type: 'number'}, { name: 'Дата', type: 'date'}, { name: 'Статус', type: 'status'}, ]
 const sort: TableColumn[] = reactive([])
 const filter: TableColumn[] = reactive([])
+const groups: TableColumn[] = reactive([])
 
 const onUpdateFilter = (col: FilterItem, index: number) => {
     col.value = ''
     col.operator = operatorsOptions[col.type][0]
     filter[index] = col
 }
+
+const onUpdateGroups = (col: SortColumn, index: number) => {
+    col.direction = 'asc'
+    groups[index] = col
+}
+
 </script>
 
 <style lang="sass" scoped>
