@@ -86,9 +86,10 @@ watch(keyPress, () => {
         background-color: #F3F6FB
         padding: 20px 25px
         font-size: 20px
+        border-bottom: 1px solid #C0C9BD
 
     &__box
-        padding: 20px 25px
+        padding: 0 25px
         background-color: #fff
         overflow: auto
         max-height: calc(90vh - 70px)

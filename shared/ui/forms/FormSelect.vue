@@ -7,12 +7,13 @@ FormField(:error="error")
                 span {{ getCurrenVal() }}
                 img.form-select__icon(src="/icons/table-bird.svg" alt="")
         .form-select__dropdown-box
-            .form-select__option(v-for="option in props.options" @click.stop="setOption(option)") {{ option[props.optionAttribute] }}
+            .form-select__option(v-for="option in props.options" @click.stop="setOption(option)") {{ getOptionVal(option) }}
 </template>
 
 <script lang="ts" setup>
 import FormField from '~/shared/ui/forms/FormField.vue'
 import DropDown from '~/shared/ui/DropDown.vue'
+import { isString } from '~/helpers/helpers'
 
 export interface Props {
     modelValue?: any,
@@ -37,8 +38,12 @@ const model = computed({
     },
 })
 
-const defaultVal: any = {}
-defaultVal[props.optionAttribute] = ''
+let defaultVal: any = ''
+if (!isString(props.modelValue)) {
+    defaultVal = {}
+    defaultVal[props.optionAttribute] = ''
+}
+
 const currOption: Ref<any> = ref(model && model.value ? model : defaultVal)
 const setOption = (option: any) => {
     currOption.value = option
@@ -46,8 +51,12 @@ const setOption = (option: any) => {
 }
 
 const getCurrenVal = () => {
-    let res = currOption.value[props.optionAttribute] || (props.current ? props.current[props.optionAttribute] : '-')
+    let res = currOption.value[props.optionAttribute] || (props.current ? props.current[props.optionAttribute] : (currOption.value || '-') )
     return res
+}
+
+const getOptionVal = (option: any) => {
+    return option[props.optionAttribute] || option
 }
 </script>
 
@@ -94,4 +103,6 @@ const getCurrenVal = () => {
         cursor: pointer
         &:hover
             background-color: #2C6A3C24
+    &:deep(.dropdown__box)
+        width: 100%
 </style>

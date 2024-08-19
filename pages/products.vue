@@ -1,31 +1,26 @@
 <template lang="pug">
-div(v-for="product in products")
-    div {{ product.name }}
-button(@click="getProducts") Get products
-div
-button(@click="addProduct = true") Add product
+button(@click="addProduct = true") Добавить изделие
 Modal(v-model="addProduct")
-    template(#header)
-        div Добавить заявку
-    div Modall content
-    div(v-for="product in products")
-        div {{ product }}
-
+    template(#header) Добавить изделие
+    ProductForm(:data="data")
+div data:
+div {{  data }}
 </template>
 
 <script lang="ts" setup>
 import Modal from '~/shared/ui/Modal.vue'
+import ProductForm from '~/widgets/ProductForm.vue'
+import { productStartData } from '~/helpers/helpers'
 
 const products:Ref<any> = ref(null)
-
 const getProducts = async () => {
     const res: any = await GET('api/v1/product')
-    console.warn(res?.data?.value)
     products.value = res?.data?.value?.data || []
 }
 
-
 const addProduct:Ref<boolean> = ref(true)
+
+const data = reactive(productStartData)
 
 </script>
 
