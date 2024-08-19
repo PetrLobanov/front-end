@@ -19,7 +19,7 @@
             <ul class="menu-wrapper__list">
                 <li class="active">
                     <img src="/icons/projects.svg" alt="">
-                    <a href="">Проект</a>
+                    <nuxt-link to="/projects">Проект</nuxt-link>
                 </li>
                 <li>
                     <img src="/icons/clients.svg" alt="">
@@ -27,7 +27,7 @@
                 </li>
                 <li>
                     <img src="/icons/products.svg" alt="">
-                    <a href="">Изделия</a>
+                    <nuxt-link to="/products">Изделия</nuxt-link>
                 </li>
                 <li>
                     <img src="/icons/orders-list.svg" alt="">
