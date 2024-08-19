@@ -11,7 +11,7 @@ form.product-form
             FormInput(v-model="data.responsible_employee_id")
         .product-form__hr
         FormRow(label="Статус ассортиментный")
-            FormSelect(v-model="data.assortment_status" :options="assortmentStatuses")
+            FormSelect(v-model="data.assortment_status" :options="assortStatuses")
         div(style="margin-top: 100px")
 </template>
 
@@ -26,6 +26,9 @@ const props = defineProps<{
     data: any,
 }>()
 
+const assortStatuses = computed(()=> {
+    return assortmentStatuses.filter( item => item !== props.data.assortment_status )
+})
 </script>
 
 <style lang="sass" scoped>
