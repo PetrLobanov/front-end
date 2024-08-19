@@ -2,7 +2,8 @@
 Teleport(v-if="model" to="body")
     .modal__wrapper(@click="model = false")
         .modal
-            .modal__close x
+            .modal__close
+                SpriteIcon(name="icons/del")
             .modal__main(@click="($event) => { $event.stopPropagation() }")
                 .modal__header
                     slot(name="header")
@@ -13,6 +14,7 @@ Teleport(v-if="model" to="body")
 <script lang="ts" setup>
 import type { ModelRef } from 'vue'
 import { keyPress, keyPressCode } from '~/store/common'
+import SpriteIcon from '~/shared/ui/SpriteIcon.vue'
 
 const props = defineProps<{
     modelValue: boolean,
@@ -72,6 +74,14 @@ watch(keyPress, () => {
         display: flex
         align-items: center
         justify-content: center
+        transition: background-color 0.5S
+        &:deep(svg)
+            width: 24px
+            height: 24px
+        &:hover
+            color: #1F5D2F
+            background-color: #FFF
+
     &__header
         background-color: #F3F6FB
         padding: 20px 25px

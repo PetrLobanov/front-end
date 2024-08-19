@@ -17,5 +17,5 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: ["@samk-dev/nuxt-vcalendar"]
+  modules: ['@samk-dev/nuxt-vcalendar', '@nuxtjs/svg-sprite',]
 });
