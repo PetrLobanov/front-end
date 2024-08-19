@@ -35,6 +35,10 @@ interface FilterItem extends TableColumn {
     operator?: any
 }
 
+interface keyPressEvent extends Event {
+    keyCode: number
+}
+
 interface TableType {
     products: Array<Object>,
     name: string,
@@ -57,4 +61,4 @@ interface TableType {
     // final_payment_actual_date: string,
 }
 
-export type { TableColumnType, TableColumn, SortColumn, FilterItem, TableType, UseFetchOptions }
+export type { TableColumnType, TableColumn, SortColumn, FilterItem, TableType, UseFetchOptions, keyPressEvent }
