@@ -87,6 +87,9 @@ watch(keyPress, () => {
         padding: 20px 25px
         font-size: 20px
         border-bottom: 1px solid #C0C9BD
+        background-image: url(/images/modal-hd-bg.svg)
+        background-position: right bottom
+        background-repeat: no-repeat
 
     &__box
         padding: 0 25px
