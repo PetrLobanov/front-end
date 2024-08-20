@@ -1,7 +1,6 @@
 <template lang="pug">
 button(@click="addProduct = true") Добавить изделие
-Modal(v-model="addProduct")
-    template(#header) Добавить изделие
+Modal(v-model="addProduct" icon="icons/add-product" hd="Добавить изделие")
     ProductForm(:data="data")
 div data:
 div {{  data }}

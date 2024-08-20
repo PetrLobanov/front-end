@@ -6,6 +6,8 @@ Teleport(v-if="model" to="body")
                 SpriteIcon(name="icons/del")
             .modal__main(@click="($event) => { $event.stopPropagation() }")
                 .modal__header
+                    svg-icon(v-if="props.icon" :name="props.icon").modal__header-icon
+                    h1(v-if="props.hd") {{ props.hd }}
                     slot(name="header")
                 .modal__box
                     slot
@@ -18,6 +20,8 @@ import SpriteIcon from '~/shared/ui/SpriteIcon.vue'
 
 const props = defineProps<{
     modelValue: boolean,
+    hd?: string,
+    icon?: string,
 }>()
 const emit = defineEmits(['update:modelValue'])
 const model = computed({
@@ -90,6 +94,12 @@ watch(keyPress, () => {
         background-image: url(/images/modal-hd-bg.svg)
         background-position: right bottom
         background-repeat: no-repeat
+        display: flex
+        align-items: center
+        gap: 15px
+        &-icon
+            width: 1em
+            height: 1em
 
     &__box
         padding: 0 25px

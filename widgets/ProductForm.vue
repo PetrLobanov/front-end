@@ -1,16 +1,16 @@
 <template lang="pug">
 form.product-form
     .product-form__body
-        FormRow(label="Название")
+        FormRow(label="Название" icon="icons/field-name")
             FormInput(v-model="data.name")
-        FormRow(label="Тип")
+        FormRow(label="Тип" icon="icons/field-type")
             FormInput(v-model="data.type")
-        FormRow(label="Номер партии")
+        FormRow(label="Номер партии" icon="icons/field-batch")
             FormInput(v-model="data.batch_number")
-        FormRow(label="Название")
+        FormRow(label="ID ответственного сотрудника" icon="icons/field-employee")
             FormInput(v-model="data.responsible_employee_id")
         .product-form__hr
-        FormRow(label="Статус ассортиментный")
+        FormRow(label="Статус ассортиментный" icon="icons/field-status")
             FormSelect(v-model="data.assortment_status" :options="assortStatuses")
         div(style="margin-top: 100px")
 </template>
