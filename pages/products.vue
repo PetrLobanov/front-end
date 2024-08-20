@@ -9,7 +9,7 @@ div {{  data }}
 <script lang="ts" setup>
 import Modal from '~/shared/ui/Modal.vue'
 import ProductForm from '~/widgets/ProductForm.vue'
-import { productStartData } from '~/helpers/helpers'
+import { productStartData } from '~/helpers/products'
 
 const products:Ref<any> = ref(null)
 const getProducts = async () => {

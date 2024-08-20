@@ -11,7 +11,11 @@ form.product-form
             FormInput(v-model="data.responsible_employee_id" type="number" min="0")
         .product-form__hr
         FormRow(label="Статус ассортиментный" icon="icons/field-status")
-            FormSelect(v-model="data.assortment_status" :options="assortStatuses")
+            FormSelect(v-model="data.assortment_status" :options="filterItem(assortmentStatuses, data.assortment_status)")
+        FormRow(label="Кожа" icon="icons/field-leather")
+            FormSelect(v-model="data.equipment_leather" :options="filterItem(equipmentLeathers, data.equipment_leather)")
+        FormRow(label="Тип стежки" icon="icons/field-stitch")
+            FormSelect(v-model="data.equipment_stitch" :options="filterItem(equipmentStitchs, data.equipment_stitch)")
         div(style="margin-top: 100px")
 </template>
 
@@ -19,16 +23,16 @@ form.product-form
 import FormRow from '~/widgets/forms/FormRow.vue'
 import FormInput from '~/shared/ui/forms/FormInput.vue'
 import FormSelect from '~/shared/ui/forms/FormSelect.vue'
-import { assortmentStatuses } from '~/helpers/helpers'
+import { assortmentStatuses, equipmentLeathers, equipmentStitchs } from '~/helpers/products'
 
 
 const props = defineProps<{
     data: any,
 }>()
 
-const assortStatuses = computed(()=> {
-    return assortmentStatuses.filter( item => item !== props.data.assortment_status )
-})
+const filterItem = ( items: string[], current: string) => {
+    return items.filter( item => item !== current )
+}
 </script>
 
 <style lang="sass" scoped>

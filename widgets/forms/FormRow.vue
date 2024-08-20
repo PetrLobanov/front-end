@@ -36,6 +36,7 @@ const props = defineProps<{
             color: inherit
             width: 1em
             height: 1em
+            min-width: 1em
             margin-top: 2px
 
     &__input
