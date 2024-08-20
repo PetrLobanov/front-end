@@ -8,7 +8,7 @@ form.product-form
         FormRow(label="Номер партии" icon="icons/field-batch")
             FormInput(v-model="data.batch_number")
         FormRow(label="ID ответственного сотрудника" icon="icons/field-employee")
-            FormInput(v-model="data.responsible_employee_id")
+            FormInput(v-model="data.responsible_employee_id" type="number" min="0")
         .product-form__hr
         FormRow(label="Статус ассортиментный" icon="icons/field-status")
             FormSelect(v-model="data.assortment_status" :options="assortStatuses")

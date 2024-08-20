@@ -6,7 +6,8 @@ Teleport(v-if="model" to="body")
                 SpriteIcon(name="icons/del")
             .modal__main(@click="($event) => { $event.stopPropagation() }")
                 .modal__header
-                    svg-icon(v-if="props.icon" :name="props.icon").modal__header-icon
+                    .modal__header-icon
+                        SpriteIcon(v-if="props.icon" :name="props.icon")
                     h1(v-if="props.hd") {{ props.hd }}
                     slot(name="header")
                 .modal__box

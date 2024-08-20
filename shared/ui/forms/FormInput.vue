@@ -2,7 +2,7 @@
 FormField(:error="error")
     .form-input(:class="{'--error': error}")
         img(v-if="leftIcon" :src="`icons/${leftIcon}`" :name="leftIcon").form-input__icon
-        input.form-input__input(type="text" v-model="model" v-bind="$attrs")
+        input.form-input__input(type="text" v-model="model" v-bind="$attrs" @keypress="onKeypress")
         slot
 </template>
 
@@ -10,10 +10,11 @@ FormField(:error="error")
 import FormField from '~/shared/ui/forms/FormField.vue'
 
 const props = defineProps<{
-    modelValue: string,
+    modelValue: string | number,
     error?: any,
     leftIcon?: string,
 }>()
+
 const emit = defineEmits(['update:modelValue'])
 const model = computed({
   get() {
@@ -23,6 +24,17 @@ const model = computed({
     emit("update:modelValue", value);
   },
 })
+
+const attrs = useAttrs()
+
+const onKeypress = (e: any) => {
+  if (attrs.type !== 'number' ) return true
+  const chr = String.fromCharCode(e.which)
+  if('0123456789'.indexOf(chr) < 0) {
+    e.preventDefault()
+    return false
+  }
+}
 </script>
 
 <style lang="sass" scoped>
