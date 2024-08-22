@@ -16,6 +16,11 @@ form.product-form
             FormSelect(v-model="data.equipment_leather" :options="filterItem(equipmentLeathers, data.equipment_leather)")
         FormRow(label="Тип стежки" icon="icons/field-stitch")
             FormSelect(v-model="data.equipment_stitch" :options="filterItem(equipmentStitchs, data.equipment_stitch)")
+        FormRow(label="Рельсы" icon="icons/field-rails")
+            FormSelect(v-model="data.equipment_rails" :options="filterItem(equipmentRails, data.equipment_rails)")
+        FormRow(label="Подлокотник" icon="icons/field-armrest")
+            FormSelect(v-model="data.equipment_armrest" :options="filterItem(equipmentArmrests, data.equipment_armrest)")
+        .product-form__hr
         div(style="margin-top: 100px")
 </template>
 
@@ -23,7 +28,7 @@ form.product-form
 import FormRow from '~/widgets/forms/FormRow.vue'
 import FormInput from '~/shared/ui/forms/FormInput.vue'
 import FormSelect from '~/shared/ui/forms/FormSelect.vue'
-import { assortmentStatuses, equipmentLeathers, equipmentStitchs } from '~/helpers/products'
+import { assortmentStatuses, equipmentLeathers, equipmentStitchs, equipmentRails, equipmentArmrests } from '~/helpers/products'
 
 
 const props = defineProps<{

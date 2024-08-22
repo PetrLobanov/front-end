@@ -2,7 +2,7 @@
 FormField(:error="error")
     .form-input(:class="{'--error': error}")
         img(v-if="leftIcon" :src="`icons/${leftIcon}`" :name="leftIcon").form-input__icon
-        input.form-input__input(type="text" v-model="model" v-bind="$attrs" @keypress="onKeypress")
+        input.form-input__input(type="text" v-model="model" v-bind="$attrs" @keypress="onKeypress($event)")
         slot
 </template>
 

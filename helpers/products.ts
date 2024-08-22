@@ -1,6 +1,8 @@
 export const assortmentStatuses = ['Assortment','Order','Archive','Discontinued']
 export const equipmentLeathers = ['Rhombus','TwoTwoTree','Mattress']
 export const equipmentStitchs = ['TwoTwoTree','TRD']
+export const equipmentRails = ['Availability','Transition']
+export const equipmentArmrests = ['Black','Beige','Gray','Order']
 
 export const productStartData = {
     'name': 'sdada',
@@ -10,8 +12,8 @@ export const productStartData = {
     'assortment_status': '',
     'equipment_leather': '',
     'equipment_stitch': '',
-    'equipment_rails': 'Transition',
-    'equipment_armrest': 'Beige',
+    'equipment_rails': '',
+    'equipment_armrest': '',
     'drawings': '/storage//tmp/fakerVfhjXg',
     'documentation': '/storage//tmp/fakerXdeGVb',
     'special_instructions': 'Et molestiae architecto accusantium nemo. Quam incidunt necessitatibus qui sapiente nisi qui consectetur. Ab aut magnam nisi.',
