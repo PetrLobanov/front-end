@@ -14,7 +14,7 @@ export const productStartData = {
     'equipment_stitch': '',
     'equipment_rails': '',
     'equipment_armrest': '',
-    'drawings': '/storage//tmp/fakerVfhjXg',
+    'drawings': null,
     'documentation': '/storage//tmp/fakerXdeGVb',
     'special_instructions': 'Et molestiae architecto accusantium nemo. Quam incidunt necessitatibus qui sapiente nisi qui consectetur. Ab aut magnam nisi.',
     'creatorEmployee': {

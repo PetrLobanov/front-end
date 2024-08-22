@@ -21,13 +21,15 @@ form.product-form
         FormRow(label="Подлокотник" icon="icons/field-armrest")
             FormSelect(v-model="data.equipment_armrest" :options="filterItem(equipmentArmrests, data.equipment_armrest)")
         .product-form__hr
-        div(style="margin-top: 100px")
+        FormRow(label="Чертежи" icon="icons/field-drawings")
+            FormInputFile(v-model="data.drawings" btn-text="Добавить чертеж" multiple :accepts="['image/jpeg','image/gif','image/png', 'application/pdf']" )
 </template>
 
 <script lang="ts" setup>
 import FormRow from '~/widgets/forms/FormRow.vue'
 import FormInput from '~/shared/ui/forms/FormInput.vue'
 import FormSelect from '~/shared/ui/forms/FormSelect.vue'
+import FormInputFile from '~/shared/ui/forms/FormInputFile.vue'
 import { assortmentStatuses, equipmentLeathers, equipmentStitchs, equipmentRails, equipmentArmrests } from '~/helpers/products'
 
 

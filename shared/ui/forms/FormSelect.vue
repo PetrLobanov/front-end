@@ -15,7 +15,7 @@ import FormField from '~/shared/ui/forms/FormField.vue'
 import DropDown from '~/shared/ui/DropDown.vue'
 import { isString } from '~/helpers/helpers'
 
-export interface Props {
+interface Props {
     modelValue?: any,
     current?: any,
     options: any[],
