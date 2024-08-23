@@ -15,18 +15,8 @@ export const productStartData = {
     'equipment_rails': '',
     'equipment_armrest': '',
     'drawings': null,
-    'documentation': '/storage//tmp/fakerXdeGVb',
-    'special_instructions': 'Et molestiae architecto accusantium nemo. Quam incidunt necessitatibus qui sapiente nisi qui consectetur. Ab aut magnam nisi.',
-    'creatorEmployee': {
-        'id': 12,
-        'name': 'Genoveva Ernser',
-        'created_at': '2024-08-15T16:55:59.000000Z',
-        'updated_at': '2024-08-15T16:55:59.000000Z'
-    },
-    'technologicalMap': {
-        'id': 11,
-        'name': 'Addie Hagenes',
-        'created_at': '2024-08-15T16:55:59.000000Z',
-        'updated_at': '2024-08-15T16:55:59.000000Z'
-    }
+    'documentation': '',
+    'special_instructions': '',
+    'creator_employee_id': '',
+    'technological_map_id': '',
 }

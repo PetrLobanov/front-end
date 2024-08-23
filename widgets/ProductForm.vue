@@ -23,6 +23,18 @@ form.product-form
         .product-form__hr
         FormRow(label="Чертежи" icon="icons/field-drawings")
             FormInputFile(v-model="data.drawings" btn-text="Добавить чертеж" multiple :accepts="['image/jpeg','image/gif','image/png', 'application/pdf']" )
+        FormRow(label="Документация" icon="icons/field-documentation")
+            FormInputFile(v-model="data.documentation" btn-text="Добавить Документацию" :maxSize="5" :accepts="['application/msword', 'image/jpeg','image/gif','image/png']" )
+        .product-form__hr
+        FormRow(label="Особые указания" icon="icons/field-instruction")
+            FormInput(v-model="data.special_instructions")
+        FormRow(label="Создатель" icon="icons/field-employee")
+            FormInput(v-model="data.creator_employee_id" type="number" min="0")
+        FormRow(label="Тех.карта" icon="icons/field-technological-map")
+            FormInput(v-model="data.technological_map_id" type="number" min="0")
+        .product-form__hr
+        .product-form__btns
+            .product-form__submit Отправить
 </template>
 
 <script lang="ts" setup>
@@ -64,7 +76,22 @@ const filterItem = ( items: string[], current: string) => {
         font-size: 0
         overflow: hidden
         background-color: #C0C9BD
-
-
-
+    &__submit
+        padding: 11px 25px
+        text-align: center
+        min-width: 158px
+        background-color: #1F5D2F
+        border: 1px solid #1F5D2F
+        border-radius: 4px
+        font-weight: 500
+        font-size: 14px
+        letter-spacing: 1.25px
+        text-transform: uppercase
+        color: #FFFFFF
+        cursor: pointer
+        display: inline-block
+        transition: all 0.3s
+        &:hover
+            background-color: #fff
+            color: #1F5D2F
 </style>

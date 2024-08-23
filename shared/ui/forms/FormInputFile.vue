@@ -2,7 +2,7 @@
 FormField(:error="error")
   ClientOnly
     .form-input-file(:class="[{'--error': error}, {'--not-empty': files.length}]")
-      input.form-input-file__input(type="file" :id="inpId" ref="fileInput" :multiple="multiple ? 'multiple': false" :accept="props.accepts" v-bind="$attrs" @change="onChange($event)")
+      input.form-input-file__input(type="file" :id="inpId" ref="fileInput" :multiple="multiple ? 'multiple': false" :accept="acceptAttr" v-bind="$attrs" @change="onChange($event)")
       .form-input-file__files(:key="key")
         .form-input-file__file(v-for="file in files") {{ file.name }}
           .form-input-file__close(@click="deleteFile(file)")
@@ -47,10 +47,14 @@ const inpId = 'inpId -' + Math.random().toString(16).slice(2)
 const fileInput: Ref<any> = ref(null)
 const startFiles = isArray(props.modelValue) ? [...props.modelValue] : ( props.modelValue ? [props.modelValue] : [] )
 let files: File[] = reactive(startFiles)
+const key: Ref<number> = ref(0)
 
 const setModel = () => {
   model.value = files.length > 1 ? files : files[0]
+  key.value++
 }
+
+const acceptAttr = props.accepts.join(', ')
 
 const onChange = (e: any) => {
   const inp = fileInput.value
@@ -65,11 +69,9 @@ const fileTypes = computed(() => {
   return items.join(', ')
 })
 
-const key: Ref<number> = ref(0)
 const deleteFile = (file:File) => {
   files = files.filter((item: File) => item.name !== file.name)
   setModel()
-  key.value++
 }
 
 </script>
