@@ -30,7 +30,7 @@ export const GET = (url: string, options?: UseFetchOptions<object>) => {
     return API(url, { ...{ method: 'GET' }, ...options })
 }
 
-export const POST = (url: string,  body?: object, options?: UseFetchOptions<object>) => {
+export const POST = (url: string,  body?: object | any, options?: UseFetchOptions<object>) => {
     if(body) {
         options = options || {}
         options.body =  JSON.stringify(body)

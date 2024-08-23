@@ -23,7 +23,7 @@ form.product-form
             FormSelect(v-model="data.equipment_armrest" :options="filterItem(equipmentArmrests, data.equipment_armrest)" :error="errors.equipment_armrest")
         .product-form__hr
         FormRow(label="Чертежи" icon="icons/field-drawings")
-            FormInputFile(v-model="data.drawings" btn-text="Добавить чертеж" multiple :accepts="['image/jpeg','image/gif','image/png', 'application/pdf']"  :error="errors.drawings")
+            FormInputFile(v-model="data.drawings" btn-text="Добавить чертеж" :accepts="['image/jpeg','image/gif','image/png', 'application/pdf']"  :error="errors.drawings")
         FormRow(label="Документация" icon="icons/field-documentation")
             FormInputFile(v-model="data.documentation" btn-text="Добавить Документацию" :maxSize="5" :accepts="['application/msword', 'image/jpeg','image/gif','image/png']" :error="errors.documentation" )
         .product-form__hr
@@ -64,7 +64,16 @@ const submit = async () => {
     loading.value = true
     let status: any
     let resData: any
-    const res = await POST('api/v1/product/create', props.data, { onResponse( { response }) {
+    const headers = {
+        'Content-Type': 'multipart/form-data',
+        'Accept': 'application/json',
+    }
+    const formData = new FormData()
+    for( let key in props.data ) {
+        formData.append(key, props.data[key]);
+    }
+    console.warn('formData - ', formData)
+    const res = await POST('api/v1/product/create', null, { body: formData, headers: headers, onResponse( { response }) {
         resData = response._data
         status = response.status
     }})

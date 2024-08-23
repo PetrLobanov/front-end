@@ -18,7 +18,7 @@ import SpriteIcon from '~/shared/ui/SpriteIcon.vue'
 import { isArray } from '~/helpers/helpers'
 
 interface Props {
-  modelValue: File | File[] | null,
+  modelValue: File | File[] | null | any,
   accepts?: any,
   maxSize?: number, // mb
   btnText?: string,
@@ -52,6 +52,15 @@ const key: Ref<number> = ref(0)
 const setModel = () => {
   model.value = files.length > 1 ? files : files[0]
   key.value++
+  // console.warn('model.value - ', model.value)
+
+  // let reader = new FileReader()
+  // reader.readAsArrayBuffer(files[0])
+  // reader.onload = function() {
+  //   console.warn(reader.result)
+  //   model.value = reader.result
+  //   key.value++
+  // }
 }
 
 const acceptAttr = props.accepts.join(', ')
