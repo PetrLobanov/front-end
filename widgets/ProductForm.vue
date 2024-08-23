@@ -64,26 +64,32 @@ const submit = async () => {
     loading.value = true
     let status: any
     let resData: any
-    const headers = {
-        'Content-Type': 'multipart/form-data',
-        'Accept': 'application/json',
-    }
-    const formData = new FormData()
-    for( let key in props.data ) {
-        formData.append(key, props.data[key]);
-    }
-    console.warn('formData - ', formData)
-    const res = await POST('api/v1/product/create', null, { body: formData, headers: headers, onResponse( { response }) {
+    const res = await POST('api/v1/product/create', props.data, {onResponse( { response }) {
         resData = response._data
         status = response.status
     }})
+    // const headers = {
+    //     'Content-Type': 'multipart/form-data',
+    //     'Accept': 'application/json',
+    // }
+    // const formData = new FormData()
+    // for( let key in props.data ) {
+    //     formData.append(key, props.data[key]);
+    // }
+    // console.warn('formData - ', formData)
+    // const res = await POST('api/v1/product/create', null, { body: formData, headers: headers, onResponse( { response }) {
+    //     resData = response._data
+    //     status = response.status
+    // }})
     loading.value = false
     errors = resData?.errors || {}
     key.value++
     if(status === 200) {
         success.value = true
     }
+
 }
+
 </script>
 
 <style lang="sass" scoped>

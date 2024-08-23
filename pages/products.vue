@@ -15,7 +15,7 @@ const getProducts = async () => {
     products.value = res?.data?.value?.data || []
 }
 
-const addProduct:Ref<boolean> = ref(true)
+const addProduct:Ref<boolean> = ref(false)
 
 const data = reactive(productStartData)
 
