@@ -5,7 +5,7 @@ export const equipmentRails = ['Availability','Transition']
 export const equipmentArmrests = ['Black','Beige','Gray','Order']
 
 export const productStartData = {
-    'name': 'sdada',
+    'name': '',
     'type': '',
     'batch_number': '',
     'responsible_employee_id': '',
