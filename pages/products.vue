@@ -58,15 +58,15 @@
 <script lang="ts" setup>
     import TableManagement from '~/widgets/table/TableManagement.vue';
     import TableValueComponents from '~/widgets/table/TableValueComponents.vue';
-    import { getProjects } from '~/shared/api';
-    import { columnProjects, type ProjectsInterface } from '~/helpers/columns';
+    import { getProducts } from '~/shared/api';
+    import { columnsProducts, type ProductsInterface } from '~/helpers/columns';
 
-    const request = await getProjects();
+    const request = await getProducts();
     const products: Object = request.data;
-    const firstProduct: ProjectsInterface = products[0]; 
-    const columns: Object = columnProjects();
+    const firstProduct: ProductsInterface = products[0]; 
+    const columns: Object = columnsProducts();
 </script>
 
-<style scoped>
-    @import url('~/assets/table.css');
+<style>
+    @import url('~/assets/table.css'); 
 </style>

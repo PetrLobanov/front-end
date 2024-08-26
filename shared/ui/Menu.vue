@@ -17,17 +17,17 @@
                 </span>
             </div>
             <ul class="menu-wrapper__list">
-                <li class="active">
+                <li :class="{'active' : isActive('/projects').value}">
                     <img src="/icons/projects.svg" alt="">
-                    <a href="">Проект</a>
+                    <NuxtLink to="/projects">Проект</NuxtLink>
                 </li>
                 <li>
                     <img src="/icons/clients.svg" alt="">
                     <a href="">Клиент</a>
                 </li>
-                <li>
+                <li :class="{'active' : isActive('/products').value}">
                     <img src="/icons/products.svg" alt="">
-                    <a href="">Изделия</a>
+                    <NuxtLink to="/products">Изделия</NuxtLink>
                 </li>
                 <li>
                     <img src="/icons/orders-list.svg" alt="">
@@ -96,7 +96,9 @@
 </template>
 
 <script lang="ts" setup>
+    const route = useRoute();
 
+    const isActive = (path: string) => computed(() => route.path === path);
 </script>
 
 <style scoped>
