@@ -1,3 +1,27 @@
+export const textСapitalize = (text="") => {
+    return text.charAt(0).toUpperCase() + text.slice(1)
+}
+
+export const isInt = (n:any) => {
+    return Number(n) === n && n % 1 === 0
+}
+
+export const isFloat = (n:any) => {
+    return Number(n) === n && n % 1 !== 0
+}
+
+export const isIntOrFloat = (n: any) => {
+    return isInt(n) || isFloat(n)
+}
+
+export const isString = (n: any) => {
+    return typeof n === 'string' || n instanceof String
+}
+
+export const isArray = (n: any) => {
+    return typeof n === 'object' && Array.isArray(n)
+}
+
 export const operatorsOptions = {
     string: [
         { value: 'contains', label: 'Содержит' },
@@ -25,3 +49,4 @@ export const operatorsOptions = {
         { value: 'empty', label: 'Пустое' },
     ],
 }
+

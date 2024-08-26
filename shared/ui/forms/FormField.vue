@@ -1,13 +1,20 @@
 <template lang="pug">
 .form-field
     slot
-    .form-field__error(v-if="error") {{ error }}
+    .form-field__error(v-for="error in errors") {{ error }}
 </template>
 
 <script lang="ts" setup>
+import { isArray } from '~/helpers/helpers'
+
 const props: any = defineProps<{
-    error?: string,
+    error?: string | [string],
 }>()
+
+const errors = computed(() => {
+    return isArray(props.error) ? props.error : [props.error]
+})
+
 
 </script>
 
@@ -17,9 +24,7 @@ const props: any = defineProps<{
     flex-direction: column
     gap: 5px
     &__error
-        font-weight: 500
         font-size: 14px
-        line-height: 22px
         color: var(--red-500-color)
 
 </style>
