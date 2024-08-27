@@ -25,8 +25,8 @@
             <div class="text-sm color-27-23-22">Я согласен с положениями и условиями</div>
         </div>
         <div>
+            <div v-if="error" class="error">{{ error }}</div>
             <FormButton @click="submit()"></FormButton>
-            <div>data: {{ data }}</div>
         </div>
     </form>
 </template>
@@ -36,15 +36,31 @@ import FormInput from '~/shared/ui/FormInput.vue'
 import CheckBox from '~/shared/ui/CheckBox.vue'
 import FormButton from '~/shared/ui/FormButton.vue'
 
-const data: any = reactive({email: '', password: ''})
+const data: any = reactive({email: 'socket@test.com', password: 'password'})
 
 const validate = () => {
     return data.email && data.password
 }
 
-const submit = () => {
-    console.warn(data)
-    if (!validate) return
+const error: Ref<string> = ref('')
+const loading: Ref<boolean> = ref(false)
+
+const submit = async () => {
+    if (!validate || loading.value) return
+    loading.value = true
+    error.value = ''
+    let status: any
+    let resData: any
+    const res = await POST('api/v1/signin', data, { onResponse( { response }) {
+        resData = response._data
+        status = response.status
+    }})
+    loading.value = false
+    if (status === 200) {
+        const token = resData?.data?.access_token
+    } else {
+        error.value = resData?.message || 'Error log in'
+    }
 }
 </script>
 
@@ -56,4 +72,8 @@ form
     box-shadow: 0px 5px 14px 0px rgba(34, 61, 71, 0.12),0px 9px 10px 0px rgba(34, 61, 71, 0.14),0px 5px 5px 0px rgba(34, 61, 71, 0.2)
     background: rgb(243, 246, 251)
     min-width: 548px
+
+.error
+    color: var(--red-500-color)
+    margin: 20px 0
 </style>

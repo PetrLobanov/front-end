@@ -6,7 +6,7 @@ export const getProducts = function() {
     const headers = {
         "Content-Type": "multipart/form-data",
         "Accept": "application/json",
-        "Authorization": "Bearer 1|7XMFJBrZTSh5og6so4mhwDmPYd1KRyHD5UJAm3SS01b23150",
+        "Authorization": "Bearer 1|FKox66sPKAvQlDvnxdITyqaIFKxcULg94tfP5xbDbb5c0dc1",
     };
 
     return fetch(url, {
@@ -21,7 +21,7 @@ export const getProjects = function() {
     const headers = {
         "Content-Type": "multipart/form-data",
         "Accept": "application/json",
-        "Authorization": "Bearer 1|7XMFJBrZTSh5og6so4mhwDmPYd1KRyHD5UJAm3SS01b23150",
+        "Authorization": "Bearer 1|FKox66sPKAvQlDvnxdITyqaIFKxcULg94tfP5xbDbb5c0dc1",
     };
 
     return fetch(url, {
