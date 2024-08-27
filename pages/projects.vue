@@ -63,7 +63,7 @@
 
     const request = await getProjects();
     const products: Object = request.data;
-    const firstProduct: ProjectsInterface = products[0]; 
+    const firstProduct: ProjectsInterface = products ? products[0] : [];
     const columns: Object = columnProjects();
 </script>
 
