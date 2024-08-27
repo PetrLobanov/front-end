@@ -35,6 +35,7 @@
 import FormInput from '~/shared/ui/FormInput.vue'
 import CheckBox from '~/shared/ui/CheckBox.vue'
 import FormButton from '~/shared/ui/FormButton.vue'
+import { userTokens } from '~/store/common'
 
 const data: any = reactive({email: 'socket@test.com', password: 'password'})
 
@@ -57,7 +58,10 @@ const submit = async () => {
     }})
     loading.value = false
     if (status === 200) {
-        const token = resData?.data?.access_token
+        const token: string = resData?.data?.access_token
+        userTokens.value = { access: token, update: Date.now()}
+        await navigateTo('/')
+
     } else {
         error.value = resData?.message || 'Error log in'
     }

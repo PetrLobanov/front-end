@@ -39,4 +39,9 @@ interface keyPressEvent extends Event {
     keyCode: number
 }
 
-export type { TableColumnType, TableColumn, SortColumn, FilterItem, UseFetchOptions, keyPressEvent }
+interface UserTokens {
+    access: string
+    update?: number
+}
+
+export type { TableColumnType, TableColumn, SortColumn, FilterItem, UseFetchOptions, keyPressEvent, UserTokens }

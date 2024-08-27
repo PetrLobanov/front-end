@@ -1,3 +1,9 @@
 <template lang="pug">
-H1 Welcome
+div Welcome
+    div userTokens {{ userTokens }}
 </template>
+
+<script lang="ts" setup>
+import { userTokens } from '~/store/common'
+
+</script>
