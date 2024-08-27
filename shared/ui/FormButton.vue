@@ -1,9 +1,9 @@
 <template>
-    <button>Вход</button>
+    <button type="button">Вход</button>
 </template>
-  
+
 <script lang="ts" setup>
-    
+
 </script>
 
 <style scoped>
