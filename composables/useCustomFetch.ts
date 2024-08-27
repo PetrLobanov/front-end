@@ -1,5 +1,5 @@
 import type { UseFetchOptions } from '~/helpers/interfaces'
-import { userTokens } from '~/store/common'
+import { userTokens, apiErrors } from '~/store/common'
 // const adminToken = '1|FKox66sPKAvQlDvnxdITyqaIFKxcULg94tfP5xbDbb5c0dc1'
 
 export const API =  (url: string, mainOptions?: UseFetchOptions<object>) => {
@@ -23,6 +23,7 @@ export const API =  (url: string, mainOptions?: UseFetchOptions<object>) => {
             }
         },
         async onRequestError({ request, options, error }) {
+            apiErrors.push({url, text: error})
             console.warn('onRequestError error - ', error)
         },
         async onResponse({ request, response, options }) {
@@ -31,7 +32,18 @@ export const API =  (url: string, mainOptions?: UseFetchOptions<object>) => {
             }
         },
         async onResponseError({ request, response, options }) {
-            console.warn('onResponseError options - ', options)
+            console.warn('onResponseError response - ', response)
+            const status = response.status
+            console.warn('status- ', status)
+            if(status === 401) {
+                await navigateTo('/login')
+                return
+            }
+            const respData = response._data
+            if (respData?.message) {
+                apiErrors.push({url, text: respData?.message})
+            }
+
         },
     })
 }

@@ -44,4 +44,10 @@ interface UserTokens {
     update?: number
 }
 
-export type { TableColumnType, TableColumn, SortColumn, FilterItem, UseFetchOptions, keyPressEvent, UserTokens }
+interface ApiError {
+    url: string
+    text?: string | object,
+    rows?: [string?]
+}
+
+export type { TableColumnType, TableColumn, SortColumn, FilterItem, UseFetchOptions, keyPressEvent, UserTokens, ApiError }

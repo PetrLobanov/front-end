@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import type { UserTokens } from '~/helpers/interfaces'
+import type { ApiError, UserTokens } from '~/helpers/interfaces'
 
 export const keyPress: Ref<number> = ref(0)
 export const keyPressCode: Ref<number> = ref(0)
@@ -21,3 +21,5 @@ export const userTokens = computed({
         localStorage.setItem('tokens', JSON.stringify(userTokensState))
     }
 })
+
+export const apiErrors = reactive<ApiError[]>([])
