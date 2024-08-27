@@ -1,6 +1,5 @@
 <template lang="pug">
 div Welcome
-    div userTokens {{ userTokens }}
 </template>
 
 <script lang="ts" setup>

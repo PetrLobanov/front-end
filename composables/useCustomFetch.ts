@@ -1,5 +1,6 @@
 import type { UseFetchOptions } from '~/helpers/interfaces'
-
+import { userTokens } from '~/store/common'
+// const adminToken = '1|FKox66sPKAvQlDvnxdITyqaIFKxcULg94tfP5xbDbb5c0dc1'
 
 export const API =  (url: string, mainOptions?: UseFetchOptions<object>) => {
     url = `http://80.68.156.177/${url}`
@@ -12,6 +13,15 @@ export const API =  (url: string, mainOptions?: UseFetchOptions<object>) => {
     const resOpt = {...defaultOpt, ...mainOptions}
     return useFetch(url, {
         ...resOpt,
+        async onRequest({ request, options }) {
+            const tokens = userTokens.value
+            const { access } = tokens
+            if (access) {
+                const headers = new Headers(options.headers)
+                headers.set('Authorization', `Bearer ${access}`)
+                options.headers = headers
+            }
+        },
         async onRequestError({ request, options, error }) {
             console.warn('onRequestError error - ', error)
         },
