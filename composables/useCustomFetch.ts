@@ -1,5 +1,6 @@
 import type { UseFetchOptions } from '~/helpers/interfaces'
-
+import { userTokens, apiErrors } from '~/store/common'
+// const adminToken = '1|FKox66sPKAvQlDvnxdITyqaIFKxcULg94tfP5xbDbb5c0dc1'
 
 export const API =  (url: string, mainOptions?: UseFetchOptions<object>) => {
     url = `http://80.68.156.177/${url}`
@@ -12,7 +13,17 @@ export const API =  (url: string, mainOptions?: UseFetchOptions<object>) => {
     const resOpt = {...defaultOpt, ...mainOptions}
     return useFetch(url, {
         ...resOpt,
+        async onRequest({ request, options }) {
+            const tokens = userTokens.value
+            const { access } = tokens
+            if (access) {
+                const headers = new Headers(options.headers)
+                headers.set('Authorization', `Bearer ${access}`)
+                options.headers = headers
+            }
+        },
         async onRequestError({ request, options, error }) {
+            apiErrors.push({url, text: error})
             console.warn('onRequestError error - ', error)
         },
         async onResponse({ request, response, options }) {
@@ -21,7 +32,18 @@ export const API =  (url: string, mainOptions?: UseFetchOptions<object>) => {
             }
         },
         async onResponseError({ request, response, options }) {
-            console.warn('onResponseError options - ', options)
+            console.warn('onResponseError response - ', response)
+            const status = response.status
+            console.warn('status- ', status)
+            if(status === 401) {
+                await navigateTo('/login')
+                return
+            }
+            const respData = response._data
+            if (respData?.message) {
+                apiErrors.push({url, text: respData?.message})
+            }
+
         },
     })
 }

@@ -1,12 +1,15 @@
-const apiHost = 'http://80.68.156.177';
-
+const apiHost = 'http://80.68.156.177'
+import { userTokens } from '~/store/common'
+const tokens = userTokens.value
+let { access } = tokens
+// access = '1|FKox66sPKAvQlDvnxdITyqaIFKxcULg94tfP5xbDbb5c0dc1' // admin token
 export const getProducts = function() {
     const url = new URL(`${apiHost}/api/v1/product`);
 
     const headers = {
         "Content-Type": "multipart/form-data",
         "Accept": "application/json",
-        "Authorization": "Bearer 1|7XMFJBrZTSh5og6so4mhwDmPYd1KRyHD5UJAm3SS01b23150",
+        "Authorization": `Bearer ${access}`,
     };
 
     return fetch(url, {
@@ -21,7 +24,7 @@ export const getProjects = function() {
     const headers = {
         "Content-Type": "multipart/form-data",
         "Accept": "application/json",
-        "Authorization": "Bearer 1|7XMFJBrZTSh5og6so4mhwDmPYd1KRyHD5UJAm3SS01b23150",
+        "Authorization": `Bearer ${access}`,
     };
 
     return fetch(url, {
